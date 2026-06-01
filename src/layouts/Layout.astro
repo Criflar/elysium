@@ -1,6 +1,6 @@
 ---
 // src/layouts/Layout.astro
-import { ClientRouter } from 'astro:transitions'; // <-- Updated for Astro 5.0
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 ---
 <!DOCTYPE html>
@@ -9,18 +9,53 @@ import '../styles/global.css';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elysium | Systems Architecture</title>
-    
     <ClientRouter />
   </head>
   <body class="bg-elysium-light text-elysium-text relative min-h-screen selection:bg-accent-purple selection:text-white font-sans">
     
-    <div class="pointer-events-none fixed inset-0 z-50 opacity-[0.075]" 
-         style="background-image: url('/noise.svg');">
+    <!-- 3D Structural Orbital Paths -->
+    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden flex items-center justify-center [perspective:2000px]">
+      
+      <!-- Outer Orbit (Equatorial Tilt) -->
+      <div class="absolute w-[150vw] h-[150vw] md:w-[110vw] md:h-[110vw] rounded-full border border-elysium-dark/[0.07] [transform:rotateX(75deg)_translateY(-15%)]"></div>
+      
+      <!-- Mid Orbit (Inclined Axis) -->
+      <div class="absolute w-[120vw] h-[120vw] md:w-[85vw] md:h-[85vw] rounded-full border border-elysium-dark/[0.07] [transform:rotateX(65deg)_rotateY(20deg)_rotateZ(45deg)]"></div>
+      
+      <!-- Inner Orbit (Counter-Inclined Axis) -->
+      <div class="absolute w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] rounded-full border border-elysium-dark/[0.07] [transform:rotateX(70deg)_rotateY(-15deg)_rotateZ(-30deg)]"></div>
+      
     </div>
 
+    <!-- Main Content -->
     <main class="relative z-10 max-w-4xl mx-auto px-6 py-20">
       <slot />
     </main>
 
+    <!-- Single-Pass Reveal Engine -->
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // 1. Trigger the reveal animation
+              entry.target.classList.remove('opacity-0', 'translate-y-8');
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+              
+              // 2. Immediately unobserve to lock it permanently in the visible state
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: "0px 0px -5% 0px", // Triggers just before coming into view
+          threshold: 0
+        });
+
+        // Attach to all elements designated as part of the reveal system
+        document.querySelectorAll('.reveal-system').forEach((element) => {
+          observer.observe(element);
+        });
+      });
+    </script>
   </body>
 </html>
