@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-elysium-light: #F4F4F5;
+  --color-elysium-dark: #121212;
+  --color-elysium-text: #2D2D2D;
+  --color-accent-purple: #4C1D95;
+  --color-accent-orange: #EA580C;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

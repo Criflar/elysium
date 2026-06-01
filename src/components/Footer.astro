@@ -1,0 +1,26 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+<footer class="py-12 relative overflow-hidden">
+  <div class="max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end gap-6">
+    
+    <div class="text-center md:text-left">
+      <p class="text-lg font-extrabold text-elysium-dark tracking-tighter">Marvin Ivan Mangubat</p>
+      <p class="text-xs font-bold text-elysium-text/40 tracking-widest uppercase mt-1">&copy; {currentYear} &bull; Systems Architecture</p>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <a href="mailto:mic.mangubat17@gmail.com" class="text-xs font-bold text-elysium-dark tracking-widest uppercase hover:text-accent-orange transition-colors">Email</a>
+      <a href="https://linkedin.com/in/marvin-ivan-mangubat" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-elysium-dark tracking-widest uppercase hover:text-accent-purple transition-colors">LinkedIn</a>
+      <a href="https://github.com/Criflar" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-elysium-dark tracking-widest uppercase hover:text-accent-purple transition-colors">GitHub</a>
+    </div>
+
+  </div>
+
+  <div class="absolute bottom-4 right-4 md:bottom-8 md:right-8">
+    <a href="/hesperides" class="text-[10px] font-bold text-elysium-text/10 hover:text-accent-orange uppercase tracking-widest transition-colors duration-500" aria-label="Explore Hesperides">
+        Hesperides
+    </a>
+  </div>
+</footer>

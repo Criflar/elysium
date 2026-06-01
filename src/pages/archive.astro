@@ -1,0 +1,73 @@
+---
+// src/pages/archive.astro
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => {
+  return b.data.year.localeCompare(a.data.year);
+});
+
+// Asynchronous rendering resolution (Astro 5.0 standard)
+const renderedProjects = await Promise.all(
+  sortedProjects.map(async (project: CollectionEntry<'projects'>) => {
+    const { Content } = await render(project);
+    return { project, Content };
+  })
+);
+---
+
+<Layout>
+  <div class="pt-32 pb-24 max-w-4xl mx-auto px-6">
+    
+    <div class="mb-16">
+      <a href="/" class="group inline-flex items-center gap-2 text-xs font-bold text-elysium-dark tracking-[0.15em] uppercase hover:text-accent-purple transition-colors duration-300 mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+        <span>Return to Executive Brief</span>
+      </a>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-elysium-dark tracking-tighter mb-4">
+        Full Project Archive
+      </h1>
+      <p class="text-lg text-elysium-text/80 max-w-2xl">
+        A comprehensive ledger of technical execution, systems engineering, and research methodology.
+      </p>
+    </div>
+
+    <div class="border-t border-elysium-dark/20">
+      
+      {renderedProjects.map(({ project, Content }) => (
+        <div id={project.id} class="relative p-6 -mx-6 md:p-8 md:-mx-8 border-b border-elysium-dark/10 scroll-mt-32 group flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 hover:bg-white/50 transition-colors duration-300 rounded-2xl">
+          
+          {/* Conditional Routing: Only renders if a link exists in the markdown */}
+          {project.data.link && (
+            <a href={project.data.link} target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10" aria-label={`View ${project.data.title}`}></a>
+          )}
+
+          <div class="w-24 shrink-0 text-sm font-bold text-elysium-text/40 tracking-widest relative z-20 pointer-events-none">{project.data.year}</div>
+          
+          <div class="flex-grow relative z-20 pointer-events-none">
+            <h3 class="text-lg font-bold text-elysium-dark group-hover:text-accent-orange transition-colors duration-300">
+              {project.data.title}
+            </h3>
+            <div class="text-sm text-elysium-text mt-2 leading-relaxed max-w-2xl prose prose-sm prose-p:my-0">
+              <Content />
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4 pointer-events-none">
+              {project.data.tags.map((tag: string) => (
+                <span class="text-[10px] font-bold text-accent-purple uppercase tracking-widest border border-elysium-dark/10 px-2 py-0.5">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+  <Footer />
+</Layout>

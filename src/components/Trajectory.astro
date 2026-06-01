@@ -1,0 +1,56 @@
+---
+// src/components/Trajectory.astro
+
+const trajectoryNodes = [
+  {
+    title: "BSMS Computer Science",
+    period: "2025 — 2028",
+    subtitle: "De La Salle University - Manila",
+    accent: "text-accent-purple",
+    description: "Executing the rigorous BS/MS track with Magna Cum Laude standing. Maintaining a core focus on Artificial Intelligence, Machine Learning, and Theory of Computation as a foundation for advanced bioinformatics architecture."
+  },
+  {
+    title: "Strategic Industry Integration",
+    period: "2025",
+    subtitle: "Shopee • VertexPro • Unbound Manila",
+    accent: "text-accent-orange",
+    description: "Transitioned theoretical models into high-leverage production environments. Engineered automated Python-LLM data pipelines, deployed secure MERN-stack architectures, and directed cross-functional engineering teams as a Scrum Master to resolve core operational bottlenecks."
+  },
+  {
+    title: "Organizational Leadership & Policy",
+    period: "2024 — 2025",
+    subtitle: "DLSU Legislative Assembly • Computer Studies Government",
+    accent: "text-accent-purple",
+    description: "Authored and implemented the comprehensive ethical Generative AI policy as a Batch Legislator, standardizing academic integrity across the university. Scaled external partnerships and industry engagements as the Director for Relations to bridge the gap between academic theory and industry execution."
+  }
+];
+---
+<section id="trajectory" class="py-24 bg-white border-y border-elysium-dark/10">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="flex items-center gap-4 mb-16">
+      <h3 class="text-2xl font-extrabold text-elysium-dark uppercase tracking-widest">
+        The Trajectory
+      </h3>
+      <div class="flex-grow h-px bg-elysium-dark/10"></div>
+    </div>
+
+    <div class="relative border-l border-elysium-dark/20 ml-3 md:ml-4 space-y-12">
+      
+      {trajectoryNodes.map((node) => (
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-elysium-dark rounded-full ring-4 ring-white"></div>
+          
+          <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+            <h4 class="text-xl font-bold text-elysium-dark">{node.title}</h4>
+            <span class={`text-xs font-bold tracking-widest uppercase mt-1 md:mt-0 ${node.accent}`}>{node.period}</span>
+          </div>
+          <p class="text-xs font-bold text-elysium-text/50 tracking-widest uppercase mb-3">{node.subtitle}</p>
+          <p class="text-sm text-elysium-text leading-relaxed">
+            {node.description}
+          </p>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</section>
