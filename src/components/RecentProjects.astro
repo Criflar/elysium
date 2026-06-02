@@ -3,13 +3,11 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
-// Fetch, filter for featured, and sort descending
 const allProjects = await getCollection('projects');
 const featuredProjects = allProjects
   .filter((project: CollectionEntry<'projects'>) => project.data.featured)
   .sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => b.data.year.localeCompare(a.data.year));
 
-// Asynchronous rendering resolution (Astro 5.0 standard)
 const renderedFeaturedProjects = await Promise.all(
   featuredProjects.map(async (project: CollectionEntry<'projects'>) => {
     const { Content } = await render(project); 

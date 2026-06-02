@@ -12,20 +12,21 @@ import '../styles/global.css';
     <ClientRouter />
   </head>
   <body class="bg-elysium-light text-elysium-text relative min-h-screen selection:bg-accent-purple selection:text-white font-sans">
+
+    <div class="pointer-events-none fixed inset-0 z-50 opacity-[0.075]" 
+         style="background-image: url('/noise.svg');">
+    </div>
     
-    <!-- 3D Structural Orbital Paths -->
+    <!-- 3D Structural Orbits -->
     <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden flex items-center justify-center [perspective:2000px]">
-      
       <div class="absolute w-[150vw] h-[150vw] md:w-[110vw] md:h-[110vw] [transform:rotateX(75deg)_translateY(-15%)]">
-        <div class="w-full h-full rounded-full border border-elysium-dark/[0.07] animate-orbit-slow"></div>
+        <div class="w-full h-full rounded-full border border-elysium-dark/[0.07] animate-orbit-slow [mask-image:linear-gradient(to_bottom,black_20%,transparent_80%)]"></div>
       </div>
-      
       <div class="absolute w-[120vw] h-[120vw] md:w-[85vw] md:h-[85vw] [transform:rotateX(65deg)_rotateY(20deg)_rotateZ(45deg)]">
-        <div class="w-full h-full rounded-full border border-elysium-dark/[0.07] animate-orbit-slower"></div>
+        <div class="w-full h-full rounded-full border border-elysium-dark/[0.10] animate-orbit-slower [mask-image:linear-gradient(to_right,black_10%,transparent_90%)]"></div>
       </div>
-      
       <div class="absolute w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] [transform:rotateX(70deg)_rotateY(-15deg)_rotateZ(-30deg)]">
-        <div class="w-full h-full rounded-full border border-elysium-dark/[0.07] animate-orbit-slow"></div>
+        <div class="w-full h-full rounded-full border border-elysium-dark/[0.10] animate-orbit-slow [mask-image:linear-gradient(to_top_left,black_30%,transparent_70%)]"></div>
       </div>
       
     </div>
@@ -35,7 +36,7 @@ import '../styles/global.css';
       <slot />
     </main>
 
-    <!-- Single-Pass Reveal Engine -->
+    <!-- Single-Pass Reveal -->
     <script>
       document.addEventListener('astro:page-load', () => {
         const observer = new IntersectionObserver((entries) => {

@@ -10,7 +10,6 @@ const sortedProjects = allProjects.sort((a: CollectionEntry<'projects'>, b: Coll
   return b.data.year.localeCompare(a.data.year);
 });
 
-// Asynchronous rendering resolution (Astro 5.0 standard)
 const renderedProjects = await Promise.all(
   sortedProjects.map(async (project: CollectionEntry<'projects'>) => {
     const { Content } = await render(project);
