@@ -8,3 +8,16 @@
   --color-accent-orange: #EA580C;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-orbit-slow {
+  animation: slow-spin 120s linear infinite;
+}
+
+.animate-orbit-slower {
+  animation: slow-spin 180s linear infinite reverse;
+}
