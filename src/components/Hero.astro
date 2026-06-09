@@ -21,9 +21,38 @@
       <a href="#notable-projects" class="px-8 py-4 bg-elysium-dark text-elysium-light font-bold text-xs tracking-[0.15em] uppercase hover:bg-accent-purple transition-colors duration-300">
         Inspect Projects
       </a>
-      <a href="mailto:mic.mangubat17@gmail.com" class="px-8 py-4 border border-elysium-dark text-elysium-dark font-bold text-xs tracking-[0.15em] uppercase hover:border-accent-orange hover:text-accent-orange transition-colors duration-300">
+      
+      <a 
+        id="contact-trigger" 
+        href="#" 
+        data-u="mic.mangubat17" 
+        data-d="gmail.com" 
+        class="px-8 py-4 border border-elysium-dark text-elysium-dark font-bold text-xs tracking-[0.15em] uppercase hover:border-accent-orange hover:text-accent-orange transition-colors duration-300"
+      >
         Initialize Contact
       </a>
     </div>
   </div>
 </section>
+
+
+<script>
+  const initContact = () => {
+    const trigger = document.getElementById('contact-trigger');
+    if (!trigger) return;
+
+    const executeRouting = () => {
+      const username = trigger.getAttribute('data-u');
+      const domain = trigger.getAttribute('data-d');
+      
+      if (username && domain) {
+        trigger.setAttribute('href', `mailto:${username}@${domain}`);
+      }
+    };
+
+    trigger.addEventListener('mouseenter', executeRouting);
+    trigger.addEventListener('click', executeRouting);
+  };
+
+  document.addEventListener('astro:page-load', initContact);
+</script>
